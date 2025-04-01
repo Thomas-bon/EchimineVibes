@@ -1,4 +1,4 @@
-# Échimine Vibes
+# Echimine Vibes
 
 Bienvenue sur **Échimine Vibes** ! Ce blog est un espace de partage, d'inspiration et d'évasion, où chaque article résonne comme une onde positive. Ici, nous explorons divers thèmes allant de la créativité au développement personnel, en passant par la culture et les voyages.
 
