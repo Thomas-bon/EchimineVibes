@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  header div {
+    width: 100%;
+    height: 75px;
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  header ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+    height: 100%;
+  }
+  
+  header ul nav ul {
+    gap: 50px;
+  }
+  
