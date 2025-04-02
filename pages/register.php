@@ -1,4 +1,3 @@
-
 <div id="loginPage">
     <div class="login-container">
         <h2>Créer son compte</h2>
@@ -27,9 +26,16 @@
 
                     if (!$connection) {
                         die("Connection BDD impossible");
+                    }
+
+                    $queryCheckEmail = "SELECT * FROM blog_user WHERE user_mail = '$email'";
+                    $resultCheckEmail = mysqli_query($connection, $queryCheckEmail);
+
+                    if (mysqli_num_rows($resultCheckEmail) > 0) {
+                        echo "<br> L'email est déjà utilisé, veuillez en choisir un autre.";
                     } else {
 
-                        $query = "INSERT INTO utilisateurs (user_mail, user_pseudo, user_mdp) VALUES ('$email', '$pseudo', '$password')";
+                        $query = "INSERT INTO blog_user (user_mail, user_pseudo, user_mdp, user_role) VALUES ('$email', '$pseudo', '$password', 'user')";
 
                         if (mysqli_query($connection, $query)) {
                             echo "Inscription réussie !";
