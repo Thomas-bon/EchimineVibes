@@ -43,8 +43,14 @@ echo '    <button type="submit">Envoyer</button>';
 
 echo '</form>';
 echo "</div>";
-// }
-// include('../BDD_Functions/delete_post.php');
-echo '<a href="/EchimineVibes/BDD_Functions/delete_post.php/?id=' . $idArticle . '" onclick="return confirm("Confirmer la suppression ?")">Supprimer</a>';
-// echo '<button>'..'</button>';
-// include('postEdit.php');
+
+$result = mysqli_query($connection, "SELECT id_user FROM blog_article WHERE id_article = $idArticle");
+
+if ($row = mysqli_fetch_assoc($result)) {
+    $id_user_creator = $row['id_user'];
+    $id_user_creator = (int) $id_user_creator; 
+
+    if ($_SESSION["user"] === $id_user_creator || $_SESSION["role"] === "admin") {
+        echo '<a href="/EchimineVibes/BDD_Functions/delete_post.php/?id=' . $idArticle . '" onclick="return confirm(\'Confirmer la suppression ?\')">Supprimer</a>';
+    }
+}
