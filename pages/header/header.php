@@ -21,6 +21,8 @@
                 <?php
                 if (isset($_SESSION["role"]) && $_SESSION["role"] === "admin") {
                     echo '<a href="?page=admin_dashboard">Accéder au panneau d\'administration</a>';
+                } elseif (isset($_SESSION["role"]) && $_SESSION["role"] === "user") {
+                    echo '<a href= "?page=user_dashboard"> Accéder au panneau d\'utilisateur</a>';
                 }
                 ?>
 

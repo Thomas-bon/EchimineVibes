@@ -25,7 +25,7 @@ if (isset($_POST['add_user'])) {
 if (isset($_POST['update_user'])) {
     $user_id = mysqli_real_escape_string($connection, $_POST['user_id']);
     $email = mysqli_real_escape_string($connection, $_POST['email']);
-    $role = mysqli_real_escape_string($connection, $_POST['role']);
+  
     $pseudo = mysqli_real_escape_string($connection, $_POST['pseudo']);
     
     $query = "UPDATE blog_user SET user_mail = '$email', user_role = '$role', user_pseudo = '$pseudo' WHERE id_user = '$user_id'";

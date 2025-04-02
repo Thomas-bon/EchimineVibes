@@ -1,5 +1,5 @@
 <?php
-include("../connection_session/connection.php");
+include("./connection_session/connection.php");
 
 
 ?>
@@ -15,6 +15,7 @@ include("../connection_session/connection.php");
 
 <body>
     <h1>home page</h1>
+    <a href=".\pages\postEdit.php">postEdit</a>
     <button> <a href="?page=login">LOGIN PAGE</a></button>
     <?php
 

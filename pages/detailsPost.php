@@ -21,7 +21,7 @@ if (!$connection) { //Si la connexion n'a pas été effectué
     echo "<div>";
     while ($resultat = mysqli_fetch_array($requete)) {
         // $link = '/EchimineVibes/pages/detailsPost/?post=' . $resultat['id_article'];
-        echo '<div class = articles>'. '<h1>'.$resultat['title'].'</h1>'.'<div class=articlesContent>'.$resultat['content'].'</div>' .'</div>' . '<br>';
+        echo '<div class = articles>'. '<h1>'.$resultat['title'].'</h1>'.'<div class=articlesContent>'.$resultat['content'].'</div>'.'<img class=articlesImage src= ../'.$resultat['img_article'].'>' .'</div>' . '<br>';
     }
     echo "</div>";
 }

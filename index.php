@@ -37,7 +37,6 @@ if (isset($_SESSION["user"])) {
     include('./pages/header/header.php');
 
     ?>
-    <a href=".\pages\postEdit.php">postEdit</a>
     <?php
 
     if (isset($_GET["page"]) && $_GET["page"] == "login") {
@@ -46,14 +45,17 @@ if (isset($_SESSION["user"])) {
         include "pages/register.php";
     } elseif (isset($_GET["page"]) && $_GET["page"] == "admin_dashboard") {
         include "pages/adminDashboard.php";
-    } elseif (isset($_GET["page"]) && $_GET["page"] == "logout") {
+    } elseif (isset($_GET["page"]) && $_GET["page"] == "user_dashboard") {
+        include "pages/userDashboard.php";
+    }elseif (isset($_GET["page"]) && $_GET["page"] == "logout") {
         include "connection_session/logout.php";
     } elseif (isset($_GET["delete_user"])) {
         include "pages/adminDashboard.php";
     } elseif (isset($_GET["page"]) && $_GET["page"] == "logout") {
         include "connection_session/logout.php";
+    } elseif (isset($_GET["page"]) && $_GET["page"] == "postEdit") {
+        include "pages/postEdit.php";
     }
-    
     
     
     else {
