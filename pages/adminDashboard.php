@@ -30,7 +30,7 @@ if (isset($_POST['update_user'])) {
     
     $query = "UPDATE blog_user SET user_mail = '$email', user_role = '$role', user_pseudo = '$pseudo' WHERE id_user = '$user_id'";
     mysqli_query($connection, $query);
-    echo "Utilisateur modifié avec succès.";
+    echo "Utilisateur modifié avec succès.";    
 }
 
 // Supprimer un utilisateur
@@ -154,7 +154,7 @@ $users_query = mysqli_query($connection, "SELECT * FROM blog_user");
 
         <!-- Formulaire pour ajouter un utilisateur -->
         <h2>Ajouter un utilisateur</h2>
-        <form action="admin_dashboard.php" method="POST">
+        <form action="" method="POST">
             <input type="text" name="pseudo" placeholder="Nom de l'utilisateur" required>
             <input type="email" name="email" placeholder="Email de l'utilisateur" required>
             <input type="text" name="password" placeholder="Mot de passe" required>
@@ -185,7 +185,7 @@ $users_query = mysqli_query($connection, "SELECT * FROM blog_user");
                         <td><?php echo $user['user_role']; ?></td>
                         <td class="actions">
                             <!-- Formulaire pour modifier un utilisateur -->
-                            <form action="admin_dashboard.php" method="POST">
+                            <form action="" method="POST">
                                 <input type="hidden" name="user_id" value="<?php echo $user['id_user']; ?>">
                                 <input type="text" name="pseudo" value="<?php echo $user['user_pseudo']; ?>" required>
                                 <input type="email" name="email" value="<?php echo $user['user_mail']; ?>" required>
