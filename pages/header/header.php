@@ -17,6 +17,13 @@
             </nav>
             <li>
                 <i class="fa-regular fa-circle-user"></i>
+                
+                <?php
+                if (isset($_SESSION["role"]) && $_SESSION["role"] === "admin") {
+                    echo '<a href="?page=admin_dashboard">Accéder au panneau d\'administration</a>';
+                }
+                ?>
+
             </li>
         </ul>
     </div>

@@ -6,6 +6,8 @@ session_start();
 
 if (isset($_SESSION["user"])) {
     echo $_SESSION["user"];
+    echo "  ";
+    echo $_SESSION["role"];
 } else {
     echo "j'suis pas connecté";
 }
@@ -42,9 +44,19 @@ if (isset($_SESSION["user"])) {
         include "pages/login.php";
     } elseif (isset($_GET["page"]) && $_GET["page"] == "register") {
         include "pages/register.php";
+    } elseif (isset($_GET["page"]) && $_GET["page"] == "admin_dashboard") {
+        include "pages/adminDashboard.php";
     } elseif (isset($_GET["page"]) && $_GET["page"] == "logout") {
         include "connection_session/logout.php";
-    } else {
+    } elseif (isset($_GET["delete_user"])) {
+        include "pages/adminDashboard.php";
+    } elseif (isset($_GET["page"]) && $_GET["page"] == "logout") {
+        include "connection_session/logout.php";
+    }
+    
+    
+    
+    else {
         include('./pages/main.php');
     }
 
