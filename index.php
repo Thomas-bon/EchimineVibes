@@ -40,9 +40,3 @@ if (isset($_GET["page"]) && $_GET["page"] == "login") {
 </body>
 
 </html>
-
-<?php
-
-include('./pages/login.php');
-include('./pages/main.php');
-include('./pages/detailsPost.php');
