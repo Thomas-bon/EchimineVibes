@@ -59,6 +59,9 @@ body {
     font-size: 0.9em;
     color: #888;
   }
+  a{
+    text-decoration: none;
+  }
 
   @media (max-width: 768px) {
     .footer-container {

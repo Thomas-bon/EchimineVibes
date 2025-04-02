@@ -5,7 +5,7 @@ include("connection_session/connection.php");
 session_start();
 
 if (isset($_SESSION["user"])) {
-    echo $_SESSION["user"];
+    echo $_SESSION["user"];//id de l'utilisateur
     echo "  ";
     echo $_SESSION["role"];
 } else {
@@ -49,12 +49,16 @@ if (isset($_SESSION["user"])) {
         include "pages/userDashboard.php";
     }elseif (isset($_GET["page"]) && $_GET["page"] == "logout") {
         include "connection_session/logout.php";
-    } elseif (isset($_GET["delete_user"])) {
+    } elseif (isset($_GET["delete_user"]) || isset($_GET["update_user"]) || isset($_GET["add_user"])) {
         include "pages/adminDashboard.php";
-    } elseif (isset($_GET["page"]) && $_GET["page"] == "logout") {
+    } elseif (isset($_GET["update_user"])) {
         include "connection_session/logout.php";
+
     } elseif (isset($_GET["page"]) && $_GET["page"] == "postEdit") {
         include "pages/postEdit.php";
+    }elseif (isset($_GET["page"]) && $_GET["page"] == "detailPost") {
+        include "./pages/detailsPost.php";
+
     }
     
     
