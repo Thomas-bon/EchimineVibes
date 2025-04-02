@@ -2,7 +2,8 @@
 
 // echo '<h1>test</h1>';
 
-function supprimerEnregistrement($id) {
+function supprimerEnregistrement($id)
+{
     // Connexion à la base de données
     include("../connection_session/connection.php");
 
@@ -18,11 +19,12 @@ function supprimerEnregistrement($id) {
 
     if (mysqli_query($connection, $sql)) {
         echo "Enregistrement ID $id supprimé avec succès. <a href='/EchimineVibes/index.php'>Retour à la liste</a> <br>";
+
     } else {
         echo "Erreur : " . mysqli_error($connection);
     }
 
-    
+
 }
 
 // Vérifie si un ID est présent dans l'URL

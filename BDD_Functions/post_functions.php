@@ -22,6 +22,8 @@ $sql = "INSERT INTO blog_article (id_user, title, content, status_article)
 if ($connection->query($sql) === TRUE) {
     $article_id = $connection->insert_id; // Récupération de l'ID de l'article
     echo "✅ Article inséré avec ID : $article_id <br>";
+    header("Location: /EchimineVibes/index.php");
+
 } else {
     die("❌ Erreur lors de l'insertion : " . $connection->error);
 }
