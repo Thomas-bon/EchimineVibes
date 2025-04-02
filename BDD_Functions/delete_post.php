@@ -18,8 +18,7 @@ function supprimerEnregistrement($id)
     $sql = "DELETE FROM blog_article WHERE id_article = $id";
 
     if (mysqli_query($connection, $sql)) {
-        echo "Enregistrement ID $id supprimé avec succès.";
-        header("Location: /EchimineVibes/index.php");
+        echo "Enregistrement ID $id supprimé avec succès. <a href='/EchimineVibes/index.php'>Retour à la liste</a> <br>";
 
     } else {
         echo "Erreur : " . mysqli_error($connection);
