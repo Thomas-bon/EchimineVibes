@@ -25,11 +25,9 @@ $connection = mysqli_connect(
         } else {
             $requete = mysqli_query($connection, "SELECT * FROM `blog_article`");
             echo "<div>";
-            echo'<h1>Nos recettes du moment</h1>'.'<section class="recipes">';
             while($resultat=mysqli_fetch_array($requete)) {
-                $link='?post='.$resultat['id_article'];
-                $chemin=glob("image/recette/".$resultat['id_recette'].".*") ;
-                echo '<div class="recipe-card">'.'<img class="img page acceuil"src="'.$chemin[0].'" alt="Pâtes maison">'.'<div class="info">'.'<a href="'.$link.'">'.$resultat['nomRecette'].'</a>'.'</div>'.'</div>'.'<br>';
+                // $link='?post='.$resultat['id_article'];
+                echo '<div>'.'<h1>'.$resultat['title'].'</h1>'.'</div>'.'<br>';
                 }
             echo "</div>";
         }
