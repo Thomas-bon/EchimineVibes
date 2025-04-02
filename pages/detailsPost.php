@@ -1,6 +1,7 @@
 <?php
 
 
+$id_user = $_SESSION['user'];
 
 
 
@@ -14,6 +15,17 @@ $idArticle = $_GET['id'];
         // $link = '/EchimineVibes/pages/detailsPost/?post=' . $resultat['id_article'];
         echo '<div class = articles>'. '<h1>'.$resultat['title'].'</h1>'.'<div class=articlesContent>'.$resultat['content'].'</div>' .'</div>' . '<br>';
     }
+    echo "</div>";
+
+
+    echo "<div>";
+    echo '<form action="/EchimineVibes/BDD_Functions/comments_fonctions.php" method="POST">';
+    echo '    <label for="texte">Votre texte :</label>';
+    echo '    <input type="text" name="texte" id="texte" required>'; 
+    echo '    <input type="hidden" value="' . htmlspecialchars($id_user) . '" id="id_user" name="id_user">';
+    echo '    <input type="hidden" value="' . htmlspecialchars($idArticle) . '" id="idArticle" name="idArticle">';
+    echo '    <button type="submit">Envoyer</button>';
+    echo '</form>';
     echo "</div>";
 // }
 // include('../BDD_Functions/delete_post.php');
