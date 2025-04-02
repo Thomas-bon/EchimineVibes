@@ -2,12 +2,13 @@
     <div>
         <ul>
             <li>
-                ECHIMINE
+                <a href="index.php">ECHIMINE</a>
+
             </li>
             <nav>
                 <ul>
                     <li>
-                        Home
+                        <a href="index.php">Home</a>
                     </li>
                     <li>
                         Articles
