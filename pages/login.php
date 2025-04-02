@@ -8,52 +8,60 @@
             <a href="?page=register" id="registerHere">S'inscrire ici.</a>
         </form>
 
-        <!-- <a href="?page=logout"><button>DECONNECTER</button></a> -->
+        <?php
+
+        if ($_POST) {
+
+
+            $connection = mysqli_connect($servername, $username, $password, $database);
+
+            $password_input = $_POST["password_input"];
+            $email_input = $_POST["email_input"];
+
+
+            if (!$connection) {
+                die("Connection BDD impossible");
+            } else {
+
+
+                $requeteFindMail = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mail = '$email_input'");
+                $requeteFindPassword = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mdp = '$password_input'");
+
+                $id_user_query = mysqli_query($connection, "SELECT id_user FROM blog_user WHERE user_mail = '$email_input'");
+                $id_user = mysqli_fetch_assoc($id_user_query);
+
+                if ($id_user && mysqli_num_rows($requeteFindMail) > 0) {
+                    if (mysqli_num_rows($requeteFindPassword) > 0) {
+
+                        $_SESSION["user"] = $id_user["id_user"]; // Assigner correctement l'id à la session
+                        header("Location: ?");
+                        exit();
+
+
+                    } else {
+                        echo "Mot de passe incorrect.";
+                    }
+
+                } else {
+                    echo "Aucun utilisateur trouvé avec cet email.";
+                }
+
+            }
+
+        }
+
+
+
+
+        ?>
+
+
+        <a href="?page=logout"><button>DECONNECTER</button></a>
 
     </div>
 </div>
 
 
-<?php
-
-if ($_POST) {
-
-    include "../connection.php";
-    $password_input = $_POST["password_input"];
-    $email_input = $_POST["email_input"];
-
-    
-    if (!$connection) {
-        die("Connection BDD impossible");
-    } else {
-
-
-        $requeteFindMail = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mail = '$email_input'");
-        $requeteFindPassword = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mdp = '$password_input'");
-
-        if (mysqli_num_rows($requeteFindMail) > 0) {
-            if (mysqli_num_rows($requeteFindPassword) > 0) {
-
-                $_SESSION["user"] = $email_input;
-                header("Location: ?");
-
-
-            } else {
-                echo "Mot de passe incorrect.";
-            }
-
-        } else {
-            echo "Aucun utilisateur trouvé avec cet email.";
-        }
-
-    }
-
-}
-
-
-
-
-?>
 
 <style>
     #signInHere {
