@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+if(isset($_SESSION["user"])) {
+    echo $_SESSION["user"];
+}else {
+    echo "j'suis pas connecté";
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
