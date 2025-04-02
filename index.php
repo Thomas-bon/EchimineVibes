@@ -19,9 +19,9 @@
     include('./pages/header/header.php');
 
     ?>
-
+<a href=".\pages\postEdit.php">postEdit</a>
 <?php
-
+  
 if (isset($_GET["page"]) && $_GET["page"] == "login") {
     include "pages/login.php";
 } elseif (isset($_GET["page"]) && $_GET["page"] == "register") {
