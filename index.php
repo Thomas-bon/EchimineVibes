@@ -52,8 +52,9 @@ if (isset($_SESSION["user"])) {
         include "pages/adminDashboard.php";
     } elseif (isset($_GET["update_user"])) {
         include "connection_session/logout.php";
+    }elseif (isset($_GET["page"]) && $_GET["page"] == "detailPost") {
+        include "./pages/detailsPost.php";
     }
-    
     
     
     else {

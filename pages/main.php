@@ -23,7 +23,7 @@
             $requete = mysqli_query($connection, "SELECT * FROM `blog_article`");
             echo "<div>";
             while($resultat=mysqli_fetch_array($requete)) {
-                $link='/EchimineVibes/pages/detailsPost/?post='.$resultat['id_article'];
+                $link='?page=detailPost&id='.$resultat['id_article'];
                 echo '<div>'.'<a href="'.$link.'"'.'<h1>'.$resultat['title'].'</h1>'.'</a>'.'</div>'.'<br>';
                 }
             echo "</div>";
