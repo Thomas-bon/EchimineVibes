@@ -15,6 +15,9 @@ $sql = "INSERT INTO blog_comments (id_article, id_user, content)
 // Exécution de la requête
 if ($connection->query($sql) === TRUE) {
     echo "✅ Commentaire ajouté avec succès!";
+    header("Location: /EchimineVibes/index.php?page=detailPost&id=$idArticle");
+    // exit();
+
 } else {
     echo "❌ Erreur lors de l'insertion du commentaire : " . $connection->error;
 }
