@@ -16,7 +16,7 @@ if ($online) {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $database = "tstblog"; // METTRE LE NOM DE LA BDD QUE VOUS AVEZ CHOISIS ICI
+    $database = "test_blog"; // METTRE LE NOM DE LA BDD QUE VOUS AVEZ CHOISIS ICI
     $connection = mysqli_connect($servername, $username, $password, $database);
 
 }

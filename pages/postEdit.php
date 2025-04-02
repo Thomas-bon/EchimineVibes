@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    echo $_SESSION['user']; 
+    $id_user = $_SESSION['user'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +12,8 @@
 </head>
 <body>
     <h1>Post Edit</h1>
-    <form action="..\BDD_Functions\post_functions.php" method="POST">
+    <form action="..\BDD_Functions\post_functions.php" method="POST" enctype="multipart/form-data">
+        <input type="hidden" value= "<?php echo $id_user ?>" id="id_user" name="id_user">
         <label for="title"></label>
             <input type="text" id="title" name="title">
         
