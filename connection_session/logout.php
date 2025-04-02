@@ -4,4 +4,4 @@
 
 session_destroy();
 
-header("Location: ?");
+header("Location: ?page=login");

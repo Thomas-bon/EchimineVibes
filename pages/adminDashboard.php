@@ -12,14 +12,23 @@ if (!$connection) {
 // Ajouter un utilisateur
 if (isset($_POST['add_user'])) {
     $email = mysqli_real_escape_string($connection, $_POST['email']);
-    $password = password_hash(mysqli_real_escape_string($connection, $_POST['password']), PASSWORD_BCRYPT);  // On hache le mot de passe
+    $password = $_POST['password'];  // Mot de passe en clair
     $role = mysqli_real_escape_string($connection, $_POST['role']);
     $pseudo = mysqli_real_escape_string($connection, $_POST['pseudo']);
     
-    $query = "INSERT INTO blog_user (user_mail, user_mdp, user_role, user_pseudo) VALUES ('$email', '$password', '$role', '$pseudo')";
-    mysqli_query($connection, $query);
+    // Hashage du mot de passe avant de l'enregistrer dans la BDD
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
+    
+    // Utilisation d'une requête préparée pour éviter l'injection SQL
+    $query = "INSERT INTO blog_user (user_mail, user_mdp, user_role, user_pseudo) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($connection, $query);
+    mysqli_stmt_bind_param($stmt, "ssss", $email, $password_hash, $role, $pseudo);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
     echo "Utilisateur ajouté avec succès.";
 }
+
 
 // Modifier un utilisateur
 if (isset($_POST['update_user'])) {

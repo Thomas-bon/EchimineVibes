@@ -8,46 +8,52 @@
             <input type="password" name="password_confirm" placeholder="Confirme mot de passe" required>
 
             <?php
-
             if ($_POST) {
+                $pseudo = $_POST["pseudo"];
+                $email = $_POST["email"];
                 $password = $_POST["password"];
                 $confirm_password = $_POST["password_confirm"];
 
+                if (!$connection) {
+                    die("Connection BDD impossible");
+                }
+
+                // Vérification si les mots de passe correspondent
                 if ($password !== $confirm_password) {
                     echo "<br> Les mots de passe ne correspondent pas.";
-
                 } else {
-
-                    $pseudo = $_POST["pseudo"];
-                    $email = $_POST["email"];
-                    $password = $_POST["password"];
-
-
-
-                    if (!$connection) {
-                        die("Connection BDD impossible");
-                    }
-
-                    $queryCheckEmail = "SELECT * FROM blog_user WHERE user_mail = '$email'";
-                    $resultCheckEmail = mysqli_query($connection, $queryCheckEmail);
+                    // Vérification si l'email est déjà utilisé
+                    $queryCheckEmail = "SELECT * FROM blog_user WHERE user_mail = ?";
+                    $stmtCheck = mysqli_prepare($connection, $queryCheckEmail);
+                    mysqli_stmt_bind_param($stmtCheck, "s", $email);
+                    mysqli_stmt_execute($stmtCheck);
+                    $resultCheckEmail = mysqli_stmt_get_result($stmtCheck);
 
                     if (mysqli_num_rows($resultCheckEmail) > 0) {
                         echo "<br> L'email est déjà utilisé, veuillez en choisir un autre.";
                     } else {
+                        // Hashage du mot de passe
+                        $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-                        $query = "INSERT INTO blog_user (user_mail, user_pseudo, user_mdp, user_role) VALUES ('$email', '$pseudo', '$password', 'user')";
+                        // Insertion sécurisée
+                        $query = "INSERT INTO blog_user (user_mail, user_pseudo, user_mdp, user_role) VALUES (?, ?, ?, 'user')";
+                        $stmt = mysqli_prepare($connection, $query);
+                        mysqli_stmt_bind_param($stmt, "sss", $email, $pseudo, $password_hash);
 
-                        if (mysqli_query($connection, $query)) {
+                        if (mysqli_stmt_execute($stmt)) {
                             echo "Inscription réussie !";
                         } else {
                             echo "Erreur lors de l'inscription : " . mysqli_error($connection);
                         }
+
+                        mysqli_stmt_close($stmt);
                     }
+
+                    mysqli_stmt_close($stmtCheck);
                 }
             }
-
-
             ?>
+
 
             <button type="submit">Créer son compte</button>
 
