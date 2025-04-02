@@ -61,7 +61,10 @@ $result = mysqli_stmt_get_result($stmt);
             <span><?php echo htmlspecialchars($row['title']); ?></span>
             <div class="icons">
                 <a href="./pages/edit_post.php?id=<?php echo $row['id_article']; ?>" class="edit">🖊️</a>
-                <span class="delete" onclick="confirmDelete(<?php echo $row['id_article']; ?>)">🗑️</span>
+                <?php
+                echo'<a href="/EchimineVibes/BDD_Functions/delete_post.php/?id='.$row['id_article'].'" onclick="return confirm("Confirmer la suppression ?")">🗑️</a>';
+                ?>
+                
             </div>
         </li>
     <?php } ?>
