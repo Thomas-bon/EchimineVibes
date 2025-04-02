@@ -8,52 +8,56 @@
             <a href="?page=register" id="registerHere">S'inscrire ici.</a>
         </form>
 
-        <!-- <a href="?page=logout"><button>DECONNECTER</button></a> -->
+        <?php
+
+        if ($_POST) {
+
+
+            $connection = mysqli_connect($servername, $username, $password, $database);
+
+            $password_input = $_POST["password_input"];
+            $email_input = $_POST["email_input"];
+
+
+            if (!$connection) {
+                die("Connection BDD impossible");
+            } else {
+
+
+                $requeteFindMail = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mail = '$email_input'");
+                $requeteFindPassword = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mdp = '$password_input'");
+
+                if (mysqli_num_rows($requeteFindMail) > 0) {
+                    if (mysqli_num_rows($requeteFindPassword) > 0) {
+
+                        $_SESSION["user"] = $email_input;
+                        header("Location: ?");
+
+
+                    } else {
+                        echo "Mot de passe incorrect.";
+                    }
+
+                } else {
+                    echo "Aucun utilisateur trouvé avec cet email.";
+                }
+
+            }
+
+        }
+
+
+
+
+        ?>
+
+
+        <a href="?page=logout"><button>DECONNECTER</button></a>
 
     </div>
 </div>
 
 
-<?php
-
-if ($_POST) {
-
-    include "../connection.php";
-    $password_input = $_POST["password_input"];
-    $email_input = $_POST["email_input"];
-
-    
-    if (!$connection) {
-        die("Connection BDD impossible");
-    } else {
-
-
-        $requeteFindMail = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mail = '$email_input'");
-        $requeteFindPassword = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mdp = '$password_input'");
-
-        if (mysqli_num_rows($requeteFindMail) > 0) {
-            if (mysqli_num_rows($requeteFindPassword) > 0) {
-
-                $_SESSION["user"] = $email_input;
-                header("Location: ?");
-
-
-            } else {
-                echo "Mot de passe incorrect.";
-            }
-
-        } else {
-            echo "Aucun utilisateur trouvé avec cet email.";
-        }
-
-    }
-
-}
-
-
-
-
-?>
 
 <style>
     #signInHere {

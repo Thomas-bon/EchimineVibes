@@ -1,10 +1,8 @@
 <?php
-$connection = mysqli_connect(
-    "localhost",
-    "root",
-    "",
-    "test_blog"
-);
+include("connection_session/connection.php");
+
+$connection = mysqli_connect($servername, $username, $password, $database);
+
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +18,7 @@ $connection = mysqli_connect(
     <h1>home page</h1>
     <button> <a href="?page=login">LOGIN PAGE</a></button>
     <?php
+
         if (!$connection) { //Si la connexion n'a pas été effectué
             die("Connection impossible");
         } else {
@@ -30,9 +29,8 @@ $connection = mysqli_connect(
                 echo '<div>'.'<h1>'.$resultat['title'].'</h1>'.'</div>'.'<br>';
                 }
             echo "</div>";
-        }
-        
-        
+            }
+
     ?>
 </body>
 

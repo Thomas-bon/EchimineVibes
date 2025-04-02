@@ -1,12 +1,15 @@
 <?php
+include("connection_session/connection.php");
+
 
 session_start();
 
-if(isset($_SESSION["user"])) {
+if (isset($_SESSION["user"])) {
     echo $_SESSION["user"];
-}else {
+} else {
     echo "j'suis pas connecté";
 }
+
 
 ?>
 
@@ -27,29 +30,31 @@ if(isset($_SESSION["user"])) {
 </head>
 
 <body>
-  <?php
+    <?php
 
     include('./pages/header/header.php');
 
     ?>
-<a href=".\pages\postEdit.php">postEdit</a>
-<?php
-  
-if (isset($_GET["page"]) && $_GET["page"] == "login") {
-    include "pages/login.php";
-} elseif (isset($_GET["page"]) && $_GET["page"] == "register") {
-    include "pages/register.php";
-} else {
-    include('./pages/main.php');
-}
- 
-?>
-
-<footer>
+    <a href=".\pages\postEdit.php">postEdit</a>
     <?php
-    include('./pages/footer.php');
+
+    if (isset($_GET["page"]) && $_GET["page"] == "login") {
+        include "pages/login.php";
+    } elseif (isset($_GET["page"]) && $_GET["page"] == "register") {
+        include "pages/register.php";
+    } elseif (isset($_GET["page"]) && $_GET["page"] == "logout") {
+        include "connection_session/logout.php";
+    } else {
+        include('./pages/main.php');
+    }
+
     ?>
-</footer>
+
+    <footer>
+        <?php
+        include('./pages/footer.php');
+        ?>
+    </footer>
 </body>
 
 </html>
