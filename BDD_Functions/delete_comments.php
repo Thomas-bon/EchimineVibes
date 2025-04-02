@@ -11,6 +11,8 @@ $sql = "DELETE FROM blog_comments WHERE id_commentaire = $idCommentaire";
 
 if (mysqli_query($connection, $sql)) {
     echo "le commentaire $idCommentaire a été supprimé";
+    header("Location: /EchimineVibes/index.php?page=detailPost&id=$idArticle");
+
 } else {
     echo "Erreur : " . mysqli_error($connection);
 }
