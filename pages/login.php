@@ -2,8 +2,8 @@
     <div class="login-container">
         <h2>Connexion</h2>
         <form action="?page=login" method="post">
-            <input type="email" name="email" placeholder="Email d'utilisateur" required>
-            <input type="password" name="password" placeholder="Mot de passe" required>
+            <input type="email" name="email_input" placeholder="Email d'utilisateur" required>
+            <input type="password" name="password_input" placeholder="Mot de passe" required>
             <button type="submit">Se connecter</button>
             <a href="?page=register" id="registerHere">S'inscrire ici.</a>
         </form>
@@ -17,24 +17,24 @@
 <?php
 
 if ($_POST) {
-    $connection = mysqli_connect("localhost", "root", "", "ma_super_bdd");
 
-    $password = $_POST["password"];
-    $email = $_POST["email"];
+    include "../connection.php";
+    $password_input = $_POST["password_input"];
+    $email_input = $_POST["email_input"];
 
-
+    
     if (!$connection) {
         die("Connection BDD impossible");
     } else {
 
 
-        $requeteFindMail = mysqli_query($connection, "SELECT * FROM utilisateurs WHERE email_user = '$email'");
-        $requeteFindPassword = mysqli_query($connection, "SELECT * FROM utilisateurs WHERE password_user = '$password'");
+        $requeteFindMail = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mail = '$email_input'");
+        $requeteFindPassword = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mdp = '$password_input'");
 
         if (mysqli_num_rows($requeteFindMail) > 0) {
             if (mysqli_num_rows($requeteFindPassword) > 0) {
 
-                $_SESSION["user"] = $email;
+                $_SESSION["user"] = $email_input;
                 header("Location: ?");
 
 
