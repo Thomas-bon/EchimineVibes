@@ -5,7 +5,7 @@ include("connection_session/connection.php");
 session_start();
 
 if (isset($_SESSION["user"])) {
-    echo $_SESSION["user"];
+    echo $_SESSION["user"];//id de l'utilisateur
     echo "  ";
     echo $_SESSION["role"];
 } else {

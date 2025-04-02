@@ -20,7 +20,7 @@
         if (!$connection) { //Si la connexion n'a pas été effectué
             die("Connection impossible");
         } else {
-            $requete = mysqli_query($connection, "SELECT * FROM `blog_article`");
+            $requete = mysqli_query($connection, "SELECT * FROM `blog_article`WHERE status_article = 1");
             echo "<div>";
             while($resultat=mysqli_fetch_array($requete)) {
                 $link='?page=detailPost&id='.$resultat['id_article'];
