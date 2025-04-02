@@ -15,10 +15,10 @@ if (isset($_POST['add_user'])) {
     $password = $_POST['password'];  // Mot de passe en clair
     $role = mysqli_real_escape_string($connection, $_POST['role']);
     $pseudo = mysqli_real_escape_string($connection, $_POST['pseudo']);
-    
+
     // Hashage du mot de passe avant de l'enregistrer dans la BDD
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
-    
+
     // Utilisation d'une requête préparée pour éviter l'injection SQL
     $query = "INSERT INTO blog_user (user_mail, user_mdp, user_role, user_pseudo) VALUES (?, ?, ?, ?)";
     $stmt = mysqli_prepare($connection, $query);
@@ -34,20 +34,32 @@ if (isset($_POST['add_user'])) {
 if (isset($_POST['update_user'])) {
     $user_id = mysqli_real_escape_string($connection, $_POST['user_id']);
     $email = mysqli_real_escape_string($connection, $_POST['email']);
-  
+
     $pseudo = mysqli_real_escape_string($connection, $_POST['pseudo']);
-    
+
     $query = "UPDATE blog_user SET user_mail = '$email', user_role = '$role', user_pseudo = '$pseudo' WHERE id_user = '$user_id'";
     mysqli_query($connection, $query);
-    echo "Utilisateur modifié avec succès.";    
+    echo "Utilisateur modifié avec succès.";
 }
 
 // Supprimer un utilisateur
 if (isset($_GET['delete_user'])) {
-    $user_id = mysqli_real_escape_string($connection, $_GET['delete_user']);
-    $query = "DELETE FROM blog_user WHERE id_user = '$user_id'";
-    mysqli_query($connection, $query);
-    echo "Utilisateur supprimé avec succès.";
+    $user_id = mysqli_real_escape_string($connection, $_GET['delete_user']); // Sécurise l'ID de l'utilisateur
+
+    // Vérifier si l'utilisateur existe
+    $query = "SELECT * FROM blog_user WHERE id_user = '$user_id'";
+    $result = mysqli_query($connection, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+        // Utilisateur existe, procéder à la suppression
+        if (mysqli_query($connection, "DELETE FROM blog_user WHERE id_user = '$user_id'")) {
+            echo "✅ Utilisateur supprimé avec succès, ses articles et commentaires ont été supprimés.";
+        } else {
+            echo "❌ Erreur lors de la suppression de l'utilisateur : " . mysqli_error($connection);
+        }
+    } else {
+        echo "❌ L'utilisateur n'existe pas.";
+    }
 }
 
 // Récupérer tous les utilisateurs
@@ -56,6 +68,7 @@ $users_query = mysqli_query($connection, "SELECT * FROM blog_user");
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,7 +104,9 @@ $users_query = mysqli_query($connection, "SELECT * FROM blog_user");
             margin-bottom: 30px;
         }
 
-        input, select, button {
+        input,
+        select,
+        button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -120,7 +135,8 @@ $users_query = mysqli_query($connection, "SELECT * FROM blog_user");
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        th, td {
+        th,
+        td {
             padding: 12px;
             text-align: left;
             border: 1px solid #ddd;
@@ -153,9 +169,9 @@ $users_query = mysqli_query($connection, "SELECT * FROM blog_user");
         .actions form {
             margin: 0;
         }
-
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -199,14 +215,19 @@ $users_query = mysqli_query($connection, "SELECT * FROM blog_user");
                                 <input type="text" name="pseudo" value="<?php echo $user['user_pseudo']; ?>" required>
                                 <input type="email" name="email" value="<?php echo $user['user_mail']; ?>" required>
                                 <select name="role">
-                                    <option value="user" <?php if ($user['user_role'] === 'user') echo 'selected'; ?>>Utilisateur</option>
-                                    <option value="admin" <?php if ($user['user_role'] === 'admin') echo 'selected'; ?>>Administrateur</option>
+                                    <option value="user" <?php if ($user['user_role'] === 'user')
+                                        echo 'selected'; ?>>
+                                        Utilisateur</option>
+                                    <option value="admin" <?php if ($user['user_role'] === 'admin')
+                                        echo 'selected'; ?>>
+                                        Administrateur</option>
                                 </select>
                                 <button type="submit" name="update_user">Mettre à jour</button>
                             </form>
-                            
+
                             <!-- Lien pour supprimer un utilisateur -->
-                            <a href="?delete_user=<?php echo $user['id_user']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+                            <a href="?delete_user=<?php echo $user['id_user']; ?>"
+                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>
@@ -215,6 +236,7 @@ $users_query = mysqli_query($connection, "SELECT * FROM blog_user");
     </div>
 
 </body>
+
 </html>
 
 <?php

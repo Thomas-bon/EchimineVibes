@@ -35,15 +35,6 @@ $result = mysqli_stmt_get_result($stmt);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Articles</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .article-list { list-style: none; padding: 0; }
-        .article-item { display: flex; align-items: center; justify-content: space-between; padding: 10px; border-bottom: 1px solid #ddd; }
-        .icons { display: flex; gap: 10px; }
-        .icons a { text-decoration: none; font-size: 18px; padding: 5px; border-radius: 5px; }
-        .edit { color: blue; }
-        .delete { color: red; cursor: pointer; }
-    </style>
     <script>
         function confirmDelete(articleId) {
             if (confirm("Voulez-vous vraiment supprimer cet article ?")) {
