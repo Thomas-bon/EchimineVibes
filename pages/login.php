@@ -27,11 +27,15 @@
                 $requeteFindMail = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mail = '$email_input'");
                 $requeteFindPassword = mysqli_query($connection, "SELECT * FROM blog_user WHERE user_mdp = '$password_input'");
 
-                if (mysqli_num_rows($requeteFindMail) > 0) {
+                $id_user_query = mysqli_query($connection, "SELECT id_user FROM blog_user WHERE user_mail = '$email_input'");
+                $id_user = mysqli_fetch_assoc($id_user_query);
+
+                if ($id_user && mysqli_num_rows($requeteFindMail) > 0) {
                     if (mysqli_num_rows($requeteFindPassword) > 0) {
 
-                        $_SESSION["user"] = $email_input;
+                        $_SESSION["user"] = $id_user["id_user"]; // Assigner correctement l'id à la session
                         header("Location: ?");
+                        exit();
 
 
                     } else {

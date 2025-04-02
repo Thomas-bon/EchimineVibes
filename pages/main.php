@@ -1,7 +1,6 @@
 <?php
 include("connection_session/connection.php");
 
-$connection = mysqli_connect($servername, $username, $password, $database);
 
 ?>
 

@@ -3,8 +3,7 @@
     <div class="login-container">
         <h2>Créer son compte</h2>
         <form action="?page=register" method="post">
-            <input type="text" name="nom" placeholder="Nom" required>
-            <input type="text" name="prenom" placeholder="Prénom" required>
+            <input type="text" name="pseudo" placeholder="Pseudo" required>
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Mot de passe" required>
             <input type="password" name="password_confirm" placeholder="Confirme mot de passe" required>
@@ -16,22 +15,21 @@
                 $confirm_password = $_POST["password_confirm"];
 
                 if ($password !== $confirm_password) {
-                    echo "Les mots de passe ne correspondent pas.";
+                    echo "<br> Les mots de passe ne correspondent pas.";
 
                 } else {
 
-                    $nom = $_POST["nom"];
-                    $prenom = $_POST["prenom"];
+                    $pseudo = $_POST["pseudo"];
                     $email = $_POST["email"];
                     $password = $_POST["password"];
 
-                    $connection = mysqli_connect("localhost", "root", "", "ma_super_bdd");
+
 
                     if (!$connection) {
                         die("Connection BDD impossible");
                     } else {
 
-                        $query = "INSERT INTO utilisateurs (nom_user, prenom_user, email_user, password_user) VALUES ('$nom', '$prenom', '$email', '$password')";
+                        $query = "INSERT INTO utilisateurs (user_mail, user_pseudo, user_mdp) VALUES ('$email', '$pseudo', '$password')";
 
                         if (mysqli_query($connection, $query)) {
                             echo "Inscription réussie !";
@@ -63,7 +61,8 @@
     #loginPage {
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        margin-top: 2%;
         width: 100%;
         height: 100%;
     }
