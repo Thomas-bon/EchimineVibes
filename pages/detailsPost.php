@@ -1,22 +1,14 @@
 <?php
-include("../connection_session/connection.php");
 
-$connection = mysqli_connect($servername, $username, $password, $database);
 
-// if (isset($_GET['post'])) {
-//     if ($_GET['post'] == '1') {
-//         echo '<h1>post 1</h1>';
-//     } elseif ($_GET['post'] == '3') {
-//         echo '<h1>post 2</h1>';
-//     } else {
-//         echo '<h1>pas de post</h1>';
-//     }
-// }
+$id_user = $_SESSION['user'];
 
-$idArticle = $_GET['post'];
-if (!$connection) { //Si la connexion n'a pas été effectué
-    die("Connection impossible");
-} else {
+
+
+$idArticle = $_GET['id'];
+// if (!$connection) { //Si la connexion n'a pas été effectué
+//     die("Connection impossible");
+// } else {
     $requete = mysqli_query($connection, "SELECT * FROM blog_article WHERE id_article = $idArticle");
     echo "<div>";
     while ($resultat = mysqli_fetch_array($requete)) {
@@ -24,7 +16,18 @@ if (!$connection) { //Si la connexion n'a pas été effectué
         echo '<div class = articles>'. '<h1>'.$resultat['title'].'</h1>'.'<div class=articlesContent>'.$resultat['content'].'</div>' .'</div>' . '<br>';
     }
     echo "</div>";
-}
+
+
+    echo "<div>";
+    echo '<form action="/EchimineVibes/BDD_Functions/comments_fonctions.php" method="POST">';
+    echo '    <label for="texte">Votre texte :</label>';
+    echo '    <input type="text" name="texte" id="texte" required>'; 
+    echo '    <input type="hidden" value="' . htmlspecialchars($id_user) . '" id="id_user" name="id_user">';
+    echo '    <input type="hidden" value="' . htmlspecialchars($idArticle) . '" id="idArticle" name="idArticle">';
+    echo '    <button type="submit">Envoyer</button>';
+    echo '</form>';
+    echo "</div>";
+// }
 // include('../BDD_Functions/delete_post.php');
 echo '<a href="/EchimineVibes/BDD_Functions/delete_post.php/?id='.$idArticle.'" onclick="return confirm("Confirmer la suppression ?")">Supprimer</a>';
 // echo '<button>'..'</button>';

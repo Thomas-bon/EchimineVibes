@@ -20,10 +20,10 @@
         if (!$connection) { //Si la connexion n'a pas été effectué
             die("Connection impossible");
         } else {
-            $requete = mysqli_query($connection, "SELECT * FROM `blog_article`");
+            $requete = mysqli_query($connection, "SELECT * FROM `blog_article`WHERE status_article = 1");
             echo "<div>";
             while($resultat=mysqli_fetch_array($requete)) {
-                $link='/EchimineVibes/pages/detailsPost/?post='.$resultat['id_article'];
+                $link='?page=detailPost&id='.$resultat['id_article'];
                 echo '<div>'.'<a href="'.$link.'"'.'<h1>'.$resultat['title'].'</h1>'.'</a>'.'</div>'.'<br>';
                 }
             echo "</div>";
