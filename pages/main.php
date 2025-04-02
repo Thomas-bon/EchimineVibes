@@ -1,5 +1,5 @@
 <?php
-include("connection_session/connection.php");
+include("../connection_session/connection.php");
 
 $connection = mysqli_connect($servername, $username, $password, $database);
 
@@ -25,8 +25,8 @@ $connection = mysqli_connect($servername, $username, $password, $database);
             $requete = mysqli_query($connection, "SELECT * FROM `blog_article`");
             echo "<div>";
             while($resultat=mysqli_fetch_array($requete)) {
-                // $link='?post='.$resultat['id_article'];
-                echo '<div>'.'<h1>'.$resultat['title'].'</h1>'.'</div>'.'<br>';
+                $link='/EchimineVibes/pages/detailsPost/?post='.$resultat['id_article'];
+                echo '<div>'.'<a href="'.$link.'"'.'<h1>'.$resultat['title'].'</h1>'.'</a>'.'</div>'.'<br>';
                 }
             echo "</div>";
             }
