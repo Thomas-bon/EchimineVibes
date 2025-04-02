@@ -1,5 +1,4 @@
 <?php
-include("../connection_session/connection.php");
 
 
 ?>
