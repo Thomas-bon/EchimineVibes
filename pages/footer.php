@@ -17,7 +17,7 @@
       <div class="footer-section" id="footer-contact">
         <h3>Contact</h3>
         <ul>
-          <li>Email : eliot.chiminello@echimine.fr</li>
+          <li>Email : eliott.chiminello@echimine.fr</li>
           <li>Téléphone : +33 7 66 87 86 06</li>
           <li>Adresse : 20 clos du buisson</li>
         </ul>
