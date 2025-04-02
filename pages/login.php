@@ -19,7 +19,10 @@
 if ($_POST) {
 
     include "../connection.php";
+    $password_input = $_POST["password_input"];
+    $email_input = $_POST["email_input"];
 
+    
     if (!$connection) {
         die("Connection BDD impossible");
     } else {
