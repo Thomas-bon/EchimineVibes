@@ -2,9 +2,9 @@
 include('../connection_session/connection.php');
 session_start();
 
-// Debugging
-var_dump($_POST); // Pour voir les données envoyées via le formulaire
-var_dump($_FILES); // Pour voir les fichiers envoyés
+// // Debugging
+// var_dump($_POST); // Pour voir les données envoyées via le formulaire
+// var_dump($_FILES); // Pour voir les fichiers envoyés
 
 // Vérification des données reçues
 if (!isset($_POST['id_user'], $_POST['title'], $_POST['content'], $_POST['status'])) {
@@ -70,6 +70,8 @@ if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
     echo "⚠️ Aucune image reçue ou erreur d'upload.";
 }
 
-echo "Article ajouté avec succès ! <br>";
+echo "Article ajouté avec succès ! <a href='../index.php'>Retour à la liste</a> <br>";
+
+
 echo "Utilisateur connecté : " . ($_SESSION['user'] ?? 'Non défini');
 ?>
