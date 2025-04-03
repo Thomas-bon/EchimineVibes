@@ -22,7 +22,7 @@ while ($resultat = mysqli_fetch_array($requeteComm)) {
     echo "<p>Commentaire de " . htmlspecialchars($resultat["user_pseudo"]) . " : " . htmlspecialchars($resultat["content"]) . "</p>";
 
     // Bouton "Modifier" qui envoie vers la page edit_comment.php
-    echo "<a href='/EchimineVibes/BDD_Functions/edit_comment.php?id_commentaire=" . $resultat["id_commentaire"] . "&idArticle=" . $idArticle . "'>Modifier</a>";
+    echo "<a href='?page=edit_comment&id_commentaire=" . $resultat["id_commentaire"] . "&idArticle=" . $idArticle . "'>Modifier</a>";
 
     // Formulaire de suppression
     echo "<form method='POST' action='/EchimineVibes/BDD_Functions/delete_comments.php'>";
