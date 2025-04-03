@@ -93,3 +93,10 @@ header nav ul li:hover::after {
     margin-top: 10px;
   }
 }
+
+
+header {
+  position: sticky;
+}
+
+

@@ -31,6 +31,7 @@
                     if (password_verify($password_input, $user['user_mdp'])) {
                         $_SESSION["user"] = $user["id_user"];
                         $_SESSION["role"] = $user["user_role"];
+                        $_SESSION["user_name"] = $user["user_pseudo"];
                         header("Location: ?");
                         exit();
                     } else {

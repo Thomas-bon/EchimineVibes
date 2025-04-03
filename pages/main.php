@@ -34,10 +34,10 @@ include("./connection_session/connection.php");
             text-align: center;
         }
 
-        nav {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+nav {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
         nav a {
             text-decoration: none;
@@ -114,7 +114,7 @@ include("./connection_session/connection.php");
 
 <body>
     <h1>home page</h1>
-    <a href=".\pages\postEdit.php">postEdit</a>
+    <a href="?page=postEdit">postEdit</a>
     <button> <a href="?page=login">LOGIN PAGE</a></button>
     <?php
 

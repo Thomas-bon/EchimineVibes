@@ -10,7 +10,7 @@ if ($online) {
     $database = "gobeliparichert";
     $connection = mysqli_connect($servername, $username, $password, $database);
 
-    
+
 } else {
 
     $servername = "localhost";
@@ -21,4 +21,3 @@ if ($online) {
 
 
 }
-

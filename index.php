@@ -4,13 +4,13 @@ include("connection_session/connection.php");
 
 session_start();
 
-if (isset($_SESSION["user"])) {
-    echo $_SESSION["user"];//id de l'utilisateur
-    echo "  ";
-    echo $_SESSION["role"];
-} else {
-    echo "j'suis pas connecté";
-}
+// if (isset($_SESSION["user"])) {
+//     echo $_SESSION["user"];//id de l'utilisateur
+//     echo "  ";
+//     echo $_SESSION["role"];
+// } else {
+//     echo "j'suis pas connecté";
+// }
 
 
 ?>
@@ -39,16 +39,16 @@ if (isset($_SESSION["user"])) {
     include('./pages/header/header.php');
 
     ?><?php
-    
-    if (!isset($_SESSION["user"])) { 
+
+    if (!isset($_SESSION["user"])) {
         // Si l'utilisateur essaie d'accéder à une autre page que login ou register, il est redirigé vers login
         if (!isset($_GET["page"]) || ($_GET["page"] !== "login" && $_GET["page"] !== "register")) {
             header("Location: ?page=login");
             exit();
         }
     }
-    
-    
+
+
     // Si l'utilisateur est connecté, il peut naviguer normalement
     if (isset($_GET["page"])) {
         switch ($_GET["page"]) {
@@ -73,6 +73,9 @@ if (isset($_SESSION["user"])) {
             case "detailPost":
                 include "pages/detailsPost.php";
                 break;
+            case "edit_comment":
+                include "./BDD_Functions/edit_comment.php";
+                break;
             default:
                 include "pages/main.php";
         }
@@ -82,8 +85,8 @@ if (isset($_SESSION["user"])) {
         include "pages/main.php";
     }
     ?>
-    
-    
+
+
 
     <footer>
         <?php

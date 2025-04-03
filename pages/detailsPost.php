@@ -15,6 +15,7 @@ $requeteComm = mysqli_query($connection, "
     FROM blog_comments
     INNER JOIN blog_user ON blog_comments.id_user = blog_user.id_user
     WHERE blog_comments.id_article = $idArticle
+    ORDER BY blog_comments.id_commentaire DESC
 ");
 
 while ($resultat = mysqli_fetch_array($requeteComm)) {
@@ -25,11 +26,13 @@ while ($resultat = mysqli_fetch_array($requeteComm)) {
     echo '<input type="hidden" value="' . htmlspecialchars($id_user) . '" name="id_user">';
     echo '<input type="hidden" value="' . htmlspecialchars($idArticle) . '" name="idArticle">';
     echo '<input type="hidden" value="' . $resultat["id_commentaire"] . '" name="id_commentaire">';
+    echo '<input type="hidden" value="' . $resultat["id_commentaire"] . '" name="id_commentaire">';
     echo "<button type='submit'>Supprimer</button>";
     echo "</form>";
     
     echo '</div>';
 }
+
 echo "<div>";
 echo '<form class="comment-form" action="/EchimineVibes/BDD_Functions/comments_fonctions.php" method="POST">';
 echo '    <label for="texte">Votre texte :</label>';
