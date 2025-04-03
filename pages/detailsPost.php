@@ -1,14 +1,7 @@
 <?php
-
-
 $id_user = $_SESSION['user'];
-
-
-
 $idArticle = $_GET['id'];
-// if (!$connection) { //Si la connexion n'a pas été effectué
-//     die("Connection impossible");
-// } else {
+
 $requete = mysqli_query($connection, "SELECT * FROM blog_article WHERE id_article = $idArticle");
 echo "<div>";
 while ($resultat = mysqli_fetch_array($requete)) {
@@ -48,7 +41,7 @@ $result = mysqli_query($connection, "SELECT id_user FROM blog_article WHERE id_a
 
 if ($row = mysqli_fetch_assoc($result)) {
     $id_user_creator = $row['id_user'];
-    $id_user_creator = (int) $id_user_creator; 
+    $id_user_creator = (int) $id_user_creator;
 
     if ($_SESSION["user"] === $id_user_creator || $_SESSION["role"] === "admin") {
         echo '<a href="/EchimineVibes/BDD_Functions/delete_post.php/?id=' . $idArticle . '" onclick="return confirm(\'Confirmer la suppression ?\')">Supprimer</a>';
