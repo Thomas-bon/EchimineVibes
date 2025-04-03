@@ -28,6 +28,7 @@ session_start();
     <script src="https://kit.fontawesome.com/1dc9ffc1cd.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./pages/header/style.css">
+    <link rel="stylesheet" href="./pages/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <title>Document</title>

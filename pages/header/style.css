@@ -1,4 +1,4 @@
-/* Reset & base styles */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -8,95 +8,133 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f6f8;
-  color: #333;
+  color: #fff;
 }
 
-/* Header container */
-header div {
-  background-color: #1f2937;
-  color: #fff;
-  height: 80px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40px;
+/* HEADER GENERAL */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #1a1a1a;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Main UL style */
-header ul {
-  display: flex;
-  align-items: center;
-  list-style: none;
+#allHeader {
   width: 100%;
-  justify-content: space-between;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-/* Logo */
-header ul li:first-child a {
-  font-size: 28px;
-  font-weight: 700;
+header ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  height: 100%;
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* LOGO */
+#icon {
+  position: absolute;
+  left: 5%;
+}
+
+#icon a {
   color: #38bdf8;
+  font-size: 24px;
+  font-weight: bold;
   text-decoration: none;
   letter-spacing: 1px;
   transition: color 0.3s ease;
 }
 
-header ul li:first-child a:hover {
-  color: #fff;
-}
-
-/* Navigation block */
-header nav ul {
-  display: flex;
-  gap: 35px;
-}
-
-header nav ul li {
-  position: relative;
-  cursor: pointer;
-  font-size: 16px;
-  color: #d1d5db;
-  transition: color 0.3s ease;
-}
-
-header nav ul li:hover {
+#icon a:hover {
   color: #ffffff;
 }
 
-header nav ul li::after {
-  content: '';
+/* NAVIGATION */
+#nav {
+  display: flex;
+  gap: 50px;
+}
+
+#nav li {
+  list-style: none;
+}
+
+#nav li a {
+  color: #d1d5db;
+  text-decoration: none;
+  font-size: 16px;
+  transition: border-bottom 0.3s ease, color 0.3s ease;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+#nav li a:hover {
+  border-bottom: 2px solid #38bdf8;
+  color: #fff;
+}
+
+/* PROFILE */
+#profile {
   position: absolute;
-  width: 0;
-  height: 2px;
-  background-color: #38bdf8;
-  left: 0;
-  bottom: -5px;
-  transition: width 0.3s;
+  right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  font-size: 14px;
 }
 
-header nav ul li:hover::after {
-  width: 100%;
+#profile span {
+  color: #facc15;
+  font-weight: 500;
 }
 
-/* Responsive tweak */
+#profile a {
+  color: #38bdf8;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#profile a:hover {
+  color: #0ea5e9;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
-  header div {
+  #allHeader {
     flex-direction: column;
     height: auto;
-    padding: 20px;
+    padding: 10px 20px;
   }
 
-  header nav ul {
+  header ul {
     flex-direction: column;
+    align-items: center;
     gap: 10px;
-    margin-top: 10px;
+  }
+
+  #nav {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  #profile {
+    position: static;
+    align-items: center;
+  }
+
+  #icon {
+    position: static;
+    margin-bottom: 10px;
   }
 }
-
-
-header {
-  position: sticky;
-}
-
-

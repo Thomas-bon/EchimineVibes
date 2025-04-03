@@ -1,48 +1,51 @@
 <?php
 include("connection_session/connection.php");
-; // Assure-toi que la connexion est correcte
 
 if (!isset($_SESSION['user'])) {
     die("Erreur : Vous devez être connecté pour modifier un post.");
 }
 
-$id_user = $_SESSION['user'];
-$message = ""; // Variable pour afficher un message après soumission
 
-// Vérifier si le formulaire est soumis
+$id_user = $_SESSION['user'];
+$message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!isset($_POST['id_user'], $_POST['title'], $_POST['content'], $_POST['status'])) {
         $message = "❌ Erreur : Données manquantes.";
     } else {
-        $title = $_POST["title"];
-        $content = $_POST["content"];
-        $status = $_POST["status"];
+        $title = $connection->real_escape_string($_POST["title"]);
+        $content = $connection->real_escape_string($_POST["content"]);
+        $status = (int) $_POST["status"];
 
-        // Insérer l'article sans image
+        // Insérer l'article
         $sql = "INSERT INTO blog_article (id_user, title, content, status_article) VALUES ('$id_user', '$title', '$content', '$status')";
         if ($connection->query($sql) === TRUE) {
-            $article_id = $connection->insert_id; // Récupérer l'ID de l'article
+            $article_id = $connection->insert_id;
             $message = "✅ Article ajouté avec succès ! ID : $article_id";
 
-            // Vérifier si une image est envoyée
-            if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
-                $uploadDir = "uploads/$id_user/";
+            // Si image présente
+            if (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
+                $uploadDir = __DIR__ . "/uploads/$id_user/"; // __DIR__ donne le chemin absolu du script
 
-                // Vérifier/créer le dossier utilisateur
-                if (!file_exists($uploadDir) && !mkdir($uploadDir, 0777, true)) {
-                    $message .= "<br>❌ Erreur : impossible de créer le dossier '$uploadDir'";
-                } else {
+                // Créer le dossier si besoin
+                if (!file_exists($uploadDir)) {
+                    if (!mkdir($uploadDir, 0777, true)) {
+                        $message .= "<br>❌ Erreur : impossible de créer le dossier '$uploadDir'";
+                    }
+                }
+
+                if (file_exists($uploadDir)) {
                     $imageTmpName = $_FILES["image"]["tmp_name"];
                     $imageExtension = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
                     $imageName = $article_id . "." . $imageExtension;
-                    $imagePath = $uploadDir . $imageName;
+                    $imagePath = "/uploads/$id_user/" . $imageName; // Chemin relatif à stocker en DB
+                    $fullPath = $uploadDir . $imageName; // Chemin absolu pour le move
 
-                    // Vérifier l'extension de l'image
                     $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
                     if (!in_array($imageExtension, $validExtensions)) {
-                        $message .= "<br>❌ Erreur : L'image doit être au format JPG, JPEG, PNG, ou GIF.";
-                    } elseif (move_uploaded_file($imageTmpName, $imagePath)) {
-                        // Mettre à jour l'article avec l'image
+                        $message .= "<br>❌ Format de fichier non autorisé.";
+                    } elseif (move_uploaded_file($imageTmpName, $fullPath)) {
                         $sqlUpdate = "UPDATE blog_article SET img_article = '$imagePath' WHERE id_article = $article_id";
                         if ($connection->query($sqlUpdate) === TRUE) {
                             $message .= "<br>✅ Image enregistrée.";
@@ -60,6 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">

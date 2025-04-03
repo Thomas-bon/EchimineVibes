@@ -42,34 +42,3 @@
 
     </div>
 </header>
-
-<style>
-    #allHeader {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        position: relative;
-    }
-
-    #profile {
-        display: flex;
-        flex-direction: column;
-    }
-
-    #icon {
-        position: absolute;
-
-        left: 10%;
-    }
-
-    #profile {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        right: 5%;
-        width: 20%;
-        /* display: none; */
-    }
-</style>
