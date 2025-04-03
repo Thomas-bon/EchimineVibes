@@ -34,10 +34,10 @@ h1 {
     text-align: center;
 }
 
-nav {
+/* nav {
     text-align: center;
     margin-bottom: 20px;
-}
+} */
 
 nav a {
     text-decoration: none;

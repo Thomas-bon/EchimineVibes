@@ -34,3 +34,10 @@ header ul li a:hover {
 header ul nav ul {
   gap: 50px;
 }
+
+
+header {
+  position: sticky;
+}
+
+

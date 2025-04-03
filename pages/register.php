@@ -41,10 +41,13 @@
                         mysqli_stmt_bind_param($stmt, "sss", $email, $pseudo, $password_hash);
 
                         if (mysqli_stmt_execute($stmt)) {
-                            echo "Inscription réussie !";
+                            $id_user = mysqli_insert_id($connection);
 
+                            $_SESSION["user"] = $id_user;
+                            $_SESSION["role"] = 'user';
 
-                            
+                            header("Location: ?");
+
                         } else {
                             echo "Erreur lors de l'inscription : " . mysqli_error($connection);
                         }
