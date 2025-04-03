@@ -15,17 +15,24 @@ $requeteComm = mysqli_query($connection, "
     FROM blog_comments
     INNER JOIN blog_user ON blog_comments.id_user = blog_user.id_user
     WHERE blog_comments.id_article = $idArticle
+    ORDER BY blog_comments.id_commentaire DESC
 ");
 
 while ($resultat = mysqli_fetch_array($requeteComm)) {
+    echo "<p>Commentaire de " . htmlspecialchars($resultat["user_pseudo"]) . " : " . htmlspecialchars($resultat["content"]) . "</p>";
+
+    // Bouton "Modifier" qui envoie vers la page edit_comment.php
+    echo "<a href='/EchimineVibes/BDD_Functions/edit_comment.php?id_commentaire=" . $resultat["id_commentaire"] . "&idArticle=" . $idArticle . "'>Modifier</a>";
+
+    // Formulaire de suppression
     echo "<form method='POST' action='/EchimineVibes/BDD_Functions/delete_comments.php'>";
     echo '<input type="hidden" value="' . htmlspecialchars($id_user) . '" name="id_user">';
     echo '<input type="hidden" value="' . htmlspecialchars($idArticle) . '" name="idArticle">';
-    echo '<input type="hidden" value="' . $resultat["id_commentaire"] . '" name="id_commentaire">'; // Nom corrigé
-    echo "<p>Commentaire de " . $resultat["user_pseudo"] . " : " . $resultat["content"] . "</p>";
+    echo '<input type="hidden" value="' . $resultat["id_commentaire"] . '" name="id_commentaire">';
     echo "<button type='submit'>Supprimer</button>";
     echo "</form>";
 }
+
 echo "<div>";
 echo '<form action="/EchimineVibes/BDD_Functions/comments_fonctions.php" method="POST">';
 echo '    <label for="texte">Votre texte :</label>';
