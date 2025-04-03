@@ -107,13 +107,13 @@
         </div>
 
         <?php
-        $requete = mysqli_query($connection, "SELECT * FROM `blog_article` WHERE status_article = 1");
+        $requete = mysqli_query($connection, "SELECT * FROM `blog_article` WHERE status_article = 1 ORDER BY creation_date DESC");
         echo '<div class="article-grid">';
         while ($resultat = mysqli_fetch_array($requete)) {
             $link = '?page=detailPost&id=' . $resultat['id_article'];
             $imagePath = isset($resultat['img_article']) && trim($resultat['img_article']) !== ''
-                ? './' . $resultat['img_article']
-                : './uploads/default.jpg';
+                ? '.' . $resultat['img_article']
+                : 'uploads/default.jpg';
 
 
             echo '<a class="article-card" href="' . $link . '">';

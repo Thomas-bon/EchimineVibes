@@ -12,7 +12,7 @@ if ($idUser === $_SESSION["user"] || $_SESSION["role"] === 'admin') {
 
     if (mysqli_query($connection, $sql)) {
 
-        header("Location: /EchimineVibes/index.php?page=detailPost&id=$idArticle");
+        header("Location: /Blog/index.php?page=detailPost&id=$idArticle");
 
 
     } else {
@@ -20,5 +20,5 @@ if ($idUser === $_SESSION["user"] || $_SESSION["role"] === 'admin') {
     }
 } else {
     echo "vous ne pouvez pas supprimer";
-    header("Location: /EchimineVibes/index.php?page=detailPost&id=$idArticle");
+    header("Location: /Blog/index.php?page=detailPost&id=$idArticle");
 }

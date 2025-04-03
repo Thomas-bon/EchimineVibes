@@ -4,7 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once "C:/wamp64/www/EchimineVibes/connection_session/connection.php"; 
+include ("../connection_session/connection.php");
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['user'])) {

@@ -1,24 +1,22 @@
 <?php
 include('../connection_session/connection.php');
-// Debugging
-var_dump($_POST); 
 
-// Récupération des données du formulaire
-$idArticle = $_POST['idArticle'];
-$content = $_POST['texte'];
-$user = $_POST['id_user'];
+// Récupération des données du formulaire et sécurisation
+$idArticle = mysqli_real_escape_string($connection, $_POST['idArticle']);
+$content = mysqli_real_escape_string($connection, $_POST['texte']);
+$user = mysqli_real_escape_string($connection, $_POST['id_user']);
 
-// Requête SQL pour insérer un commentaire dans la base de données
+// Requête SQL sécurisée
 $sql = "INSERT INTO blog_comments (id_article, id_user, content) 
         VALUES ('$idArticle', '$user', '$content')";
 
-// Exécution de la requête
+// Exécution
 if ($connection->query($sql) === TRUE) {
     echo "✅ Commentaire ajouté avec succès!";
-    header("Location: /EchimineVibes/index.php?page=detailPost&id=$idArticle");
-    // exit();
-
+    header("Location: /Blog/index.php?page=detailPost&id=$idArticle");
+    // exit(); <-- à activer si tu veux couper ici
 } else {
     echo "❌ Erreur lors de l'insertion du commentaire : " . $connection->error;
 }
+
 ?>

@@ -22,7 +22,7 @@ while ($resultat = mysqli_fetch_array($requeteComm)) {
     echo '<div class="comment-box">';
     echo "<p><strong>" . htmlspecialchars($resultat["user_pseudo"]) . "</strong> : " . htmlspecialchars($resultat["content"]) . "</p>";
     
-    echo "<form method='POST' action='/EchimineVibes/BDD_Functions/delete_comments.php'>";
+    echo "<form method='POST' action='/Blog/BDD_Functions/delete_comments.php'>";
     echo '<input type="hidden" value="' . htmlspecialchars($id_user) . '" name="id_user">';
     echo '<input type="hidden" value="' . htmlspecialchars($idArticle) . '" name="idArticle">';
     echo '<input type="hidden" value="' . $resultat["id_commentaire"] . '" name="id_commentaire">';
@@ -34,7 +34,7 @@ while ($resultat = mysqli_fetch_array($requeteComm)) {
 }
 
 echo "<div>";
-echo '<form class="comment-form" action="/EchimineVibes/BDD_Functions/comments_fonctions.php" method="POST">';
+echo '<form class="comment-form" action="/Blog/BDD_Functions/comments_fonctions.php" method="POST">';
 echo '    <label for="texte">Votre texte :</label>';
 echo '    <input type="text" name="texte" id="texte" required>';
 echo '    <input type="hidden" value="' . htmlspecialchars($id_user) . '" id="id_user" name="id_user">';
@@ -51,7 +51,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     $id_user_creator = (int) $id_user_creator;
 
     if ($_SESSION["user"] === $id_user_creator || $_SESSION["role"] === "admin") {
-        echo '<a href="/EchimineVibes/BDD_Functions/delete_post.php/?id=' . $idArticle . '" onclick="return confirm(\'Confirmer la suppression ?\')">Supprimer</a>';
+        echo '<a href="/Blog/BDD_Functions/delete_post.php/?id=' . $idArticle . '" onclick="return confirm(\'Confirmer la suppression ?\')">Supprimer</a>';
     }
 }
 

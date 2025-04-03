@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Si image présente
             if (isset($_FILES["image"]) && $_FILES["image"]["error"] === 0) {
-                $uploadDir = __DIR__ . "/uploads/$id_user/"; // __DIR__ donne le chemin absolu du script
+                $uploadDir = realpath(__DIR__ . "/../") . "/uploads/$id_user/";
 
                 // Créer le dossier si besoin
                 if (!file_exists($uploadDir)) {
