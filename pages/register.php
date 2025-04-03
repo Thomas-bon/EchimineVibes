@@ -42,6 +42,9 @@
 
                         if (mysqli_stmt_execute($stmt)) {
                             echo "Inscription réussie !";
+
+
+                            
                         } else {
                             echo "Erreur lors de l'inscription : " . mysqli_error($connection);
                         }
