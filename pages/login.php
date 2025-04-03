@@ -1,7 +1,7 @@
 <div id="loginPage">
     <div class="login-container">
         <h2>Connexion</h2>
-        <form action="?page=login" method="post">
+        <form class="auth-container" action="?page=login" method="post">
             <input type="email" name="email_input" placeholder="Email d'utilisateur" required>
             <input type="password" name="password_input" placeholder="Mot de passe" required>
             <button type="submit">Se connecter</button>
@@ -54,7 +54,7 @@
         ?>
 
 
-        <a href="?page=logout"><button>DECONNECTER</button></a>
+        <a href="?page=logout"><button class="btn-primary">DECONNECTER</button></a>
 
     </div>
 </div>

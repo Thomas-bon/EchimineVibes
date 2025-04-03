@@ -45,21 +45,83 @@ $result = mysqli_stmt_get_result($stmt);
 </head>
 <body>
 
-<h2>Mes Articles</h2>
-<ul class="article-list">
+<div class="dashboard-wrapper">
+  <h2>Mes Articles</h2>
+  <ul class="article-list">
     <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-        <li class="article-item">
-            <span><?php echo htmlspecialchars($row['title']); ?></span>
-            <div class="icons">
-                <a href="./pages/edit_post.php?id=<?php echo $row['id_article']; ?>" class="edit">🖊️</a>
-                <?php
-                echo'<a href="/EchimineVibes/BDD_Functions/delete_post.php/?id='.$row['id_article'].'" onclick="return confirm("Confirmer la suppression ?")">🗑️</a>';
-                ?>
-                
-            </div>
-        </li>
+      <li class="article-item">
+        <span><?php echo htmlspecialchars($row['title']); ?></span>
+        <button onclick="confirmDelete(<?php echo $row['id_article']; ?>)">Supprimer</button>
+      </li>
     <?php } ?>
-</ul>
+  </ul>
+</div>
+
 
 </body>
 </html>
+
+<style>
+.dashboard-wrapper {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-wrapper h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+.article-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.article-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9fafb;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.article-item:hover {
+  transform: translateY(-2px);
+}
+
+.article-item span {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.article-item button {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.article-item button:hover {
+  background-color: #dc2626;
+}
+
+
+</style>

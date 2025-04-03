@@ -173,66 +173,67 @@ $users_query = mysqli_query($connection, "SELECT * FROM blog_user");
 </head>
 
 <body>
+    <div class="dashboard-wrapper">
+        <div class="container">
+            <h1>Panneau d'administration</h1>
 
-    <div class="container">
-        <h1>Panneau d'administration</h1>
+            <!-- Formulaire pour ajouter un utilisateur -->
+            <h2>Ajouter un utilisateur</h2>
+            <form class="auth-container" action="" method="POST">
+                <input type="text" name="pseudo" placeholder="Nom de l'utilisateur" required>
+                <input type="email" name="email" placeholder="Email de l'utilisateur" required>
+                <input type="text" name="password" placeholder="Mot de passe" required>
+                <select name="role">
+                    <option value="user">Utilisateur</option>
+                    <option value="admin">Administrateur</option>
+                </select>
+                <button class="btn-primary" type="submit" name="add_user">Ajouter l'utilisateur</button>
+            </form>
 
-        <!-- Formulaire pour ajouter un utilisateur -->
-        <h2>Ajouter un utilisateur</h2>
-        <form action="" method="POST">
-            <input type="text" name="pseudo" placeholder="Nom de l'utilisateur" required>
-            <input type="email" name="email" placeholder="Email de l'utilisateur" required>
-            <input type="text" name="password" placeholder="Mot de passe" required>
-            <select name="role">
-                <option value="user">Utilisateur</option>
-                <option value="admin">Administrateur</option>
-            </select>
-            <button type="submit" name="add_user">Ajouter l'utilisateur</button>
-        </form>
-
-        <h2>Liste des utilisateurs</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Rôle</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($user = mysqli_fetch_assoc($users_query)): ?>
+            <h2>Liste des utilisateurs</h2>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><?php echo $user['id_user']; ?></td>
-                        <td><?php echo $user['user_pseudo']; ?></td>
-                        <td><?php echo $user['user_mail']; ?></td>
-                        <td><?php echo $user['user_role']; ?></td>
-                        <td class="actions">
-                            <!-- Formulaire pour modifier un utilisateur -->
-                            <form action="" method="POST">
-                                <input type="hidden" name="user_id" value="<?php echo $user['id_user']; ?>">
-                                <input type="text" name="pseudo" value="<?php echo $user['user_pseudo']; ?>" required>
-                                <input type="email" name="email" value="<?php echo $user['user_mail']; ?>" required>
-                                <select name="role">
-                                    <option value="user" <?php if ($user['user_role'] === 'user')
-                                        echo 'selected'; ?>>
-                                        Utilisateur</option>
-                                    <option value="admin" <?php if ($user['user_role'] === 'admin')
-                                        echo 'selected'; ?>>
-                                        Administrateur</option>
-                                </select>
-                                <button type="submit" name="update_user">Mettre à jour</button>
-                            </form>
-
-                            <!-- Lien pour supprimer un utilisateur -->
-                            <a href="?delete_user=<?php echo $user['id_user']; ?>"
-                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
-                        </td>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Actions</th>
                     </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php while ($user = mysqli_fetch_assoc($users_query)): ?>
+                        <tr>
+                            <td><?php echo $user['id_user']; ?></td>
+                            <td><?php echo $user['user_pseudo']; ?></td>
+                            <td><?php echo $user['user_mail']; ?></td>
+                            <td><?php echo $user['user_role']; ?></td>
+                            <td class="actions">
+                                <!-- Formulaire pour modifier un utilisateur -->
+                                <form action="" method="POST">
+                                    <input type="hidden" name="user_id" value="<?php echo $user['id_user']; ?>">
+                                    <input type="text" name="pseudo" value="<?php echo $user['user_pseudo']; ?>" required>
+                                    <input type="email" name="email" value="<?php echo $user['user_mail']; ?>" required>
+                                    <select name="role">
+                                        <option value="user" <?php if ($user['user_role'] === 'user')
+                                                                    echo 'selected'; ?>>
+                                            Utilisateur</option>
+                                        <option value="admin" <?php if ($user['user_role'] === 'admin')
+                                                                    echo 'selected'; ?>>
+                                            Administrateur</option>
+                                    </select>
+                                    <button class="class=" btn-primary"" type="submit" name="update_user">Mettre à jour</button>
+                                </form>
+
+                                <!-- Lien pour supprimer un utilisateur -->
+                                <a href="?delete_user=<?php echo $user['id_user']; ?>"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">Supprimer</a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </body>
