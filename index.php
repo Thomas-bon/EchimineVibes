@@ -36,37 +36,52 @@ if (isset($_SESSION["user"])) {
 
     include('./pages/header/header.php');
 
-    ?>
-    <?php
-
-    if (isset($_GET["page"]) && $_GET["page"] == "login") {
-        include "pages/login.php";
-    } elseif (isset($_GET["page"]) && $_GET["page"] == "register") {
-        include "pages/register.php";
-    } elseif (isset($_GET["page"]) && $_GET["page"] == "admin_dashboard") {
-        include "pages/adminDashboard.php";
-    } elseif (isset($_GET["page"]) && $_GET["page"] == "user_dashboard") {
-        include "pages/userDashboard.php";
-    }elseif (isset($_GET["page"]) && $_GET["page"] == "logout") {
-        include "connection_session/logout.php";
+    ?><?php
+    
+    if (!isset($_SESSION["user"])) { 
+        // Si l'utilisateur essaie d'accéder à une autre page que login ou register, il est redirigé vers login
+        if (!isset($_GET["page"]) || ($_GET["page"] !== "login" && $_GET["page"] !== "register")) {
+            header("Location: ?page=login");
+            exit();
+        }
+    }
+    
+    
+    // Si l'utilisateur est connecté, il peut naviguer normalement
+    if (isset($_GET["page"])) {
+        switch ($_GET["page"]) {
+            case "login":
+                include "pages/login.php";
+                break;
+            case "register":
+                include "pages/register.php";
+                break;
+            case "admin_dashboard":
+                include "pages/adminDashboard.php";
+                break;
+            case "user_dashboard":
+                include "pages/userDashboard.php";
+                break;
+            case "logout":
+                include "connection_session/logout.php";
+                break;
+            case "postEdit":
+                include "pages/postEdit.php";
+                break;
+            case "detailPost":
+                include "pages/detailsPost.php";
+                break;
+            default:
+                include "pages/main.php";
+        }
     } elseif (isset($_GET["delete_user"]) || isset($_GET["update_user"]) || isset($_GET["add_user"])) {
         include "pages/adminDashboard.php";
-    } elseif (isset($_GET["update_user"])) {
-        include "connection_session/logout.php";
-
-    } elseif (isset($_GET["page"]) && $_GET["page"] == "postEdit") {
-        include "pages/postEdit.php";
-    }elseif (isset($_GET["page"]) && $_GET["page"] == "detailPost") {
-        include "./pages/detailsPost.php";
-
+    } else {
+        include "pages/main.php";
     }
-    
-    
-    else {
-        include('./pages/main.php');
-    }
-
     ?>
+    
+    
 
     <footer>
         <?php
