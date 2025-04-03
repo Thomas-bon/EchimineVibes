@@ -10,9 +10,9 @@ $idCommentaire = $_POST["id_commentaire"];
 if ($idUser === $_SESSION["user"] || $_SESSION["role"] === 'admin') {
     $sql = "DELETE FROM blog_comments WHERE id_commentaire = $idCommentaire";
 
-if (mysqli_query($connection, $sql)) {
+    if (mysqli_query($connection, $sql)) {
 
-    header("Location: /EchimineVibes/index.php?page=detailPost&id=$idArticle");
+        header("Location: /EchimineVibes/index.php?page=detailPost&id=$idArticle");
 
 
     } else {
@@ -20,4 +20,5 @@ if (mysqli_query($connection, $sql)) {
     }
 } else {
     echo "vous ne pouvez pas supprimer";
+    header("Location: /EchimineVibes/index.php?page=detailPost&id=$idArticle");
 }
