@@ -9,9 +9,6 @@
                     <li>
                         <a href="index.php">Home</a>
                     </li>
-                    <li>
-                        Articles
-                    </li>
                 </ul>
             </nav>
             <div id="profile">

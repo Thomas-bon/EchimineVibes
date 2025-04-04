@@ -3,17 +3,7 @@
       <div class="footer-section" id="footer-logo">
         MonSiteWeb
       </div>
-
-      <div class="footer-section" id="footer-navigation">
-        <h3>Navigation</h3>
-        <ul>
-          <li><a href="#accueil">Accueil</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#projets">Projets</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-
+      
       <div class="footer-section" id="footer-contact">
         <h3>Contact</h3>
         <ul>

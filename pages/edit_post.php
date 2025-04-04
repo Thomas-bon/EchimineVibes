@@ -42,10 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_stmt_bind_param($stmt, "ssii", $title, $content, $id_article, $user_id);
     
     if (mysqli_stmt_execute($stmt)) {
-        echo "Article mis à jour avec succès. <a href='../index.php'>Retour à la liste</a>";
+        // Rediriger automatiquement vers l'accueil
+        header("Location: ?");
+        exit();
     } else {
         echo "Erreur lors de la mise à jour de l'article.";
     }
+    
 }
 ?>
 
@@ -64,7 +67,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label>Contenu :</label><br>
         <textarea name="content" rows="5" required><?php echo htmlspecialchars($article['content']); ?></textarea><br><br>
         
-        <button type="submit">Mettre à jour</button>
+        <button class="btn" type="submit">Mettre à jour</button>
     </form>
 </body>
 </html>
+<style>
+    .btn {
+        display: inline-block;
+        background-color: #38bdf8;
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+</style>

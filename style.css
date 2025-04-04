@@ -4,6 +4,7 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #f4f6f8;
   color: #1e293b;
+  min-height: 60vh;
 }
 
 /* Headings */

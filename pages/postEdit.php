@@ -67,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,32 +75,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
+    <div class="height">
+        <h1>Post Edit</h1>
 
-    <h1>Post Edit</h1>
+        <?php if (!empty($message)) {
+            echo "<p style='color: red;'>$message</p>";
+        } ?>
 
-    <?php if (!empty($message)) { echo "<p style='color: red;'>$message</p>"; } ?>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <input type="hidden" value="<?php echo $id_user; ?>" id="id_user" name="id_user">
 
-    <form action="" method="POST" enctype="multipart/form-data">
-        <input type="hidden" value="<?php echo $id_user; ?>" id="id_user" name="id_user">
-        
-        <label for="title">Titre :</label>
-        <input type="text" id="title" name="title" required>
-        
-        <label for="content">Contenu :</label>
-        <textarea id="content" name="content" required></textarea>
+            <label for="title">Titre :</label>
+            <input type="text" id="title" name="title" required>
 
-        <label for="status">Statut :</label>
-        <select name="status" id="status">
-            <option value="1">Affiché</option>
-            <option value="0">Brouillon</option>
-        </select>
-        
-        <label for="image">Image :</label>
-        <input type="file" id="image" name="image">
+            <label for="content">Contenu :</label>
+            <textarea id="content" name="content" required></textarea>
 
-        <button type="submit">Envoyer</button>
-    </form>
+            <label for="status">Statut :</label>
+            <select name="status" id="status">
+                <option value="1">Affiché</option>
+                <option value="0">Brouillon</option>
+            </select>
 
+            <label for="image">Image :</label>
+            <input type="file" id="image" name="image">
+
+            <button class="btn" type="submit">Envoyer</button>
+        </form>
+    </div>
 </body>
 
 </html>
+<style>
+    .btn {
+        display: inline-block;
+        background-color: #38bdf8;
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }
+
+    .height {
+        min-height: 60vh;
+    }
+</style>
